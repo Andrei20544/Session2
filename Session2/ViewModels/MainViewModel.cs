@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -12,8 +13,35 @@ namespace Session2.ViewModels
 {
     class MainViewModel : INotifyPropertyChanged
     {
-        private Agent[] _agents;
         public ObservableCollection<DopAgent> Agents { get; set; }
+
+        private DopAgent _selectedAgent;
+        public DopAgent SelectedAgent
+        {
+            get
+            {
+                //try
+                //{
+                //    using (ModelBD model = new ModelBD())
+                //    {
+                //        var agents = from a in model.Agent
+                //                     select a;
+
+                //        var agent = agents.Where(id => id.ID == _selectedAgent.ID).FirstOrDefault();
+
+                //        OnProppertyChanged();
+
+                //        return agent;
+                //    }
+                //}
+                //catch (Exception ex)
+                //{
+                //    return null;
+                //}
+                return _selectedAgent;
+            }
+            set { _selectedAgent = value; OnProppertyChanged(); }
+        }
 
         public ICommand SearchCommand { get; set; }
 

@@ -5,9 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Session2"
         mc:Ignorable="d"
-        Title="MainWindow" 
-        Height="550" 
-        Width="1000">
+        Title="Agents" 
+        Height="720" 
+        Width="1200"
+        MinHeight="650"
+        MinWidth="1000"
+        MaxHeight="840"
+        MaxWidth="1350">
 
     <Window.Resources>
 
@@ -72,7 +76,8 @@
         <Grid Grid.Row="1">
 
             <ListBox ItemsSource="{Binding Path=Agents}"
-                     Margin="15 0 15 0">
+                     SelectedItem="{Binding Path=SelectedAgent, Mode=TwoWay}"
+                     Margin="15 0 15 0" MouseDoubleClick="ListBox_MouseDoubleClick">
 
                 <ListBox.Resources>
 
@@ -91,7 +96,8 @@
                         <Grid HorizontalAlignment="Center"
                               VerticalAlignment="Center"
                               Width="950"
-                              Height="150">
+                              Height="150"
+                              Margin="0 0 0 5">
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="150"/>
@@ -113,16 +119,16 @@
                                     <TextBlock Text="{Binding Path=Title}"
                                                FontSize="21"
                                                />
-                                    <TextBlock Text="dsdsdsdsds"
+                                    <TextBlock Text="{Binding Path=Date}"
                                                FontSize="19"/>
                                     <TextBlock Text="{Binding Path=Phone}"
                                                FontSize="19"/>
                                     <StackPanel Orientation="Horizontal"
                                                 VerticalAlignment="Center">
 
-                                        <TextBlock Text="Приоритетность"
+                                        <TextBlock Text="Приоритетность:"
                                                    FontSize="19"/>
-                                        <TextBlock Text="10"
+                                        <TextBlock Text="{Binding Path=Priority}"
                                                    Margin="10 0 0 0"
                                                    FontSize="19"
                                                    VerticalAlignment="Center"/>

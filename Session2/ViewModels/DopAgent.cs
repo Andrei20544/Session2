@@ -11,6 +11,17 @@ namespace Session2.ViewModels
 {
     public class DopAgent : INotifyPropertyChanged
     {
+        private int? _ID { get; set; }
+        public int? ID
+        {
+            get { return _ID; }
+            set
+            {
+                _ID = value;
+                OnProppertyChanged();
+            }
+        }
+
         private string _title { get; set; }
         public string Title
         {
@@ -55,8 +66,8 @@ namespace Session2.ViewModels
             }
         }
 
-        private int _priority { get; set; }
-        public int Priority
+        private double? _priority { get; set; }
+        public double? Priority
         {
             get { return _priority; }
             set

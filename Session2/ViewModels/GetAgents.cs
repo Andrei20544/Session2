@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Session2.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,65 +22,52 @@ namespace Session2.ViewModels
                                  where a.Title.Contains(title) || a.Email.Contains(title) || a.Phone.Contains(title)
                                  select a;
 
-                    var productSale = from ps in model.ProductSale
-                                      select ps;
-
                     var agetTypes = from at in model.AgentType
                                     select at;
 
                     DopAgent dopAgent = null;
                     List<DopAgent> dopList = new List<DopAgent>();
-                    BitmapImage bitmapImage = null;
 
                     string type = "";
 
-                    foreach (var item in productSale)
+                    if (agents != null)
                     {
-
                         foreach (var agent in agents)
                         {
 
-                            if (item.AgentID.Equals(agent.ID))
+                            dopAgent = new DopAgent();
+
+                            int? id = agent.AgentTypeID;
+                            
+                            if (agetTypes != null)
                             {
-                                dopAgent = new DopAgent();
+                                //type = agetTypes.Where(at => at.ID == id).FirstOrDefault().Title;
+                            }
 
-                                int? id = agent.AgentTypeID;
-                                type = agetTypes.Where(at => at.ID == id).FirstOrDefault().Title;
+                            dopAgent.ID = agent.ID;
+                            dopAgent.Title = type + " | " + agent.Title;
+                            dopAgent.Phone = agent.Phone;
+                            dopAgent.Date = GetCountDate.GetCountOnYear(agent.ID).ToString() + " продаж за год";
+                            dopAgent.Percent = 10;
+                            dopAgent.Priority = agent.Priority;
+                            dopAgent.Img = ProcessIMG.GetBitmapImage(agent);
 
-                                dopAgent.Title = type + " | " + agent.Title;
-                                dopAgent.Phone = agent.Phone;
-                                dopAgent.Date = "2020";
-                                dopAgent.Percent = 10;
-                                dopAgent.Priority = 10;
-
-                                Uri img = null;
-
-                                if (agent.Logo == "не указано" || agent.Logo == "нет" || agent.Logo == "отсутствует") img = new Uri("Resources/agents/picture.png", UriKind.Relative);
-                                else img = new Uri("Resources" + agent.Logo.Replace("\\", "/"), UriKind.Relative);
-
-                                bitmapImage = new BitmapImage(img);
-
-                                dopAgent.Img = bitmapImage;
-
-                                if (!filt.Equals("Все типы"))
-                                {
-                                    if (filt.Equals(type)) dopList.Add(dopAgent);
-                                }
-                                else if (filt.Equals("Все типы"))
-                                {
-                                    dopList.Add(dopAgent);
-                                }
-                                    
+                            if (!filt.Equals("Все типы"))
+                            {
+                                if (filt.Equals(type)) dopList.Add(dopAgent);
+                            }
+                            else if (filt.Equals("Все типы"))
+                            {
+                                dopList.Add(dopAgent);
                             }
 
                         }
-
                     }
 
                     return GetSortAgents(dopList, ordBy);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 return null;

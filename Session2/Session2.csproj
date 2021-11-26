@@ -64,6 +64,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helpers\GetCountDate.cs" />
+    <Compile Include="Helpers\ProcessIMG.cs" />
     <Compile Include="Model\Shop.cs" />
     <Compile Include="Model\Supplier.cs" />
     <Compile Include="Model\sysdiagrams.cs" />
@@ -72,6 +74,9 @@
     <Compile Include="ViewModels\DopAgent.cs" />
     <Compile Include="ViewModels\GetAgents.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="Views\ChangeWindow.xaml.cs">
+      <DependentUpon>ChangeWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -87,6 +92,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\ChangeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Material.cs" />
@@ -124,9 +133,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\agents\agent_1.png" />
     <Resource Include="Resources\agents\agent_10.png" />
